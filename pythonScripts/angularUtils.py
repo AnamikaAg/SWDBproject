@@ -11,7 +11,7 @@ def convertToRadial(xz):
     theta = np.arctan2(xz[:,1], xz[:,0])
     return np.column_stack((r,theta))
 
-def circular_hist(ax, x, bins=16, density=True, offset=0, gaps=True):
+def circular_hist(ax, x, weights, bins=16, density=True, offset=0, gaps=True):
     """
     Produce a circular histogram of angles on ax.
 
@@ -58,7 +58,7 @@ def circular_hist(ax, x, bins=16, density=True, offset=0, gaps=True):
         bins = np.linspace(-np.pi, np.pi, num=bins+1)
 
     # Bin data and record counts
-    n, bins = np.histogram(x, bins=bins)
+    n, bins = np.histogram(x, bins=bins, weights = weights)
 
     # Compute width of each bin
     widths = np.diff(bins)
